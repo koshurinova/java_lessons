@@ -15,8 +15,10 @@ public class Multidimentional_arrays {
         System.out.println();
         for (int i=0; i<matrice.length; i++){
             for (int k=0; k<matrice.length; k++){
-                System.out.println("Элемент массива "+i+ k+" равен " +matrice[i][k]);
+                System.out.print(matrice[i][k]+" "); //выводим на одной строчке
             }
+            System.out.println();
         }
+//        System.out.println();
     }
 }
