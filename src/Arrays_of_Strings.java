@@ -11,9 +11,9 @@ public class Arrays_of_Strings {
         System.out.println();
         // цикл for-each
 
-        for (String string:strings ) { //(тип данных имя перемнной внутри цикла: имя массива)
-            System.out.println(string);
-        }
+            for (String string:strings ) { //(тип данных имя перемнной внутри цикла: имя массива)
+                System.out.println(string);
+            }
         System.out.println();
         //еще пример
         int[] numbers={1,2,3};
@@ -25,4 +25,6 @@ public class Arrays_of_Strings {
         }
         System.out.println(sum);
         }
+
+
 }

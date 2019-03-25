@@ -15,6 +15,7 @@ public class Arrays {
         System.out.println();//пустая строка для разделения
 // еще способо задания массива
         int numbers2[]={1,2,3};
+        int numbers3[][]= new int [5][];
         for (int i=0; i<numbers2.length; i++){
             System.out.println("Элемент массива "+i+ " равен " +numbers2[i]);
         }
