@@ -1,10 +1,10 @@
 package MyTask;
 
 import java.util.*;
-
+import java.util.Random;
 public class ArrayTasks {
     public static void main(String[] args) {
-        int[] numbers = {10, 7, 0, 4, 0, 0, 5, 7};
+        int[] numbers = {2, 2, 2, 2, 0, 0};
 
 
 
@@ -15,14 +15,18 @@ public class ArrayTasks {
 //        getZeroToStart(numbers);
 //        setArrayNumber();
 //        fillArrayZeroOne();
-//          fillArraySimpleNumbers();
-        deleteArrayDublicate(numbers);
+//        fillArraySimpleNumbers();
+//        deleteArrayDublicate(numbers);
+//        fillArrayRandom(5);
+//        getCount(numbers,7);
+//        fillArrayRandomTask(15);
+        fillArrayRandomOneTwo(6);
+//        findX(numbers,9);
     }
 
     //вычисляет максимальное значение массива
     public static int getMax(int[] array) {
         int max = array[0];
-
         for (int i = 1; i <= array.length - 1; i++) {
             if (array[i] >= max) {
                 max = array[i];
@@ -103,7 +107,6 @@ public class ArrayTasks {
     }
 
     //Заполнить массив последовательными нечетными числами, начиная с единицы.
-
     public static void setArrayNumber(){
         Scanner input= new Scanner(System.in); //создаем поток входных данных
         System.out.println("Введите необходимую длину массива:");
@@ -120,7 +123,6 @@ public class ArrayTasks {
     }
 
     //Заполнить массив нулями и единицами, при этом данные значения чередуются, начиная с нуля.
-
     public static void fillArrayZeroOne(){
         Scanner input= new Scanner(System.in); //создаем поток входных данных
         System.out.println("Введите необходимую длину массива:");
@@ -141,7 +143,6 @@ public class ArrayTasks {
 
    // Заполнить массив заданной длины различными простыми числами. Натуральное число, большее единицы,
     // называется простым, если оно делится только на себя и на единицу.
-
     public static void fillArraySimpleNumbers(){
         Scanner input= new Scanner(System.in); //создаем поток входных данных
         System.out.println("Введите необходимую длину массива:");
@@ -170,39 +171,145 @@ public class ArrayTasks {
                 }
     }
 
-
     //заполнение массива элементами для печати
     public static void printArray(int[] array) {
         for (int i = 0; i < array.length; i++) {
             System.out.print(array[i] + ", ");
         }
     }
+
     //удаление дублей из массива
     public static void deleteArrayDublicate(int[] array) {
         printArray(array);
-        List<int[]> listOfStrings = new ArrayList<int[]>();
-        listOfStrings = Arrays.asList(array);
-        System.out.println("Полученный ArrayList с помощью метода Arrays.asList()");
-        for (String str : listOfStrings)
-            System.out.print(" " + str);
-//        listOfStrings = new ArrayList<String>();
-//        ArrayList numbersList2 = new ArrayList();
-//        Collections.addAll(numbersList2, array);
-//        System.out.println();
-        System.out.println(listOfStrings.get(0));
+        String[] arrayS = Arrays.toString(array).split("[\\[\\]]")[1].split(", ");
+        List<String> listOfStrings = new ArrayList<String>();
+        Collections.addAll(listOfStrings, arrayS);
+        System.out.println();
+        for (int i = 0; i <= listOfStrings.size() - 1; i++) {
+            String value = listOfStrings.get(i);
+            for (int k = i + 1; k <= listOfStrings.size() - 1; k++) {
+                if (listOfStrings.get(k).equals(value)) {
+                    listOfStrings.remove(k);
+                    }
+            }
+        }
 
-
-//        for (int i = 1; i <= numbersList2.size() - 1; i++) {
-//            int value = (int) numbersList2.get(i);
-//            for (int k = i + 1; k <= array.length - 1; k++) {
-//
-//                if ((int) numbersList2.get(k) == value) {
-//                    numbersList2.remove(k);
-//                }
-//            }
-//        }
-//        for (int j = 0; j < numbersList2.size(); j++) {
-//            System.out.print(numbersList2.get(j) + ", ");
-//        }
+        System.out.println("Новый массив");
+        for (String x : listOfStrings)
+            System.out.print(" " + x);
     }
+
+    //Заполнить массив случайными числами
+    public static void fillArrayRandom(int s){
+        int[] array = new int[s];
+        for(int i=0;i<array.length;i++){
+            array[i]=new Random().nextInt(9);
+        }
+        printArray(array);
+    }
+
+    //вычисляет кол-во чисел с в массиве
+    public static int getCount(int[] array, int c) {
+        int count=0;
+        for (int i = 0; i <= array.length - 1; i++) {
+            if (array[i] ==c) {
+                count++;
+            }
+        }
+//        System.out.println("Количество цифр "+c+ " в массиве = " + count);
+        return count;
+    }
+
+    //Сформировать массив из случайных целых чисел от 0 до 9 , в котором единиц от 3 до 5 и двоек больше троек
+    public static void fillArrayRandomTask(int s){
+        int[] array = new int[s];
+        for(int i=0;i<array.length;i++){
+            array[i]=new Random().nextInt(9);
+        }
+        printArray(array);
+        System.out.println();
+        //   Проверяем кол-во единиц
+        if (getCount(array,1)>5){
+               for (int k=0; k<=array.length-1; k++) {
+                   if (array[k]==1 && getCount(array,1)>5){
+                       array[k]= new Random().nextInt(9);
+                   }
+               }
+        }else
+                if(getCount(array,1)<3) {
+                    for (int k = 0; k <= array.length - 1; k++) {
+                        if (array[k]!= 1 && getCount(array, 1) < 3) {
+                            int n = (int) Math.floor(Math.random() * array.length);
+                            array[n] = 1;
+                        }
+                    }
+                }
+//           Сравниваем кол-во двоек и троек
+        if (getCount(array,2)<=getCount(array,3)){
+            for (int k = 0; k <= array.length - 1; k++)
+            {
+                if (array[k] != 1&& getCount(array,2)-getCount(array,3)<=0 ) {
+                    array[k] = 2;
+                }
+            }
+        }
+        printArray(array);
+
+    }
+
+    //Найти элемент массива = х
+    public static int findX(int[] array, int x) {
+        for (int i = 0; i <= array.length - 1; i++) {
+            if (array[i] == x) {
+//                System.out.println("Заданное число " +x+" имеет индекс "+i );
+                return i;
+//                break;
+            }
+
+        }
+//        System.out.println("Заданное число " +x+" отсутствует в массиве" );
+        return 1000;
+
+    }
+
+
+    // Заполните массив случайным образом нулями, единицами и двойками так, чтобы первая двойка в массиве
+    // встречалась раньше первой единицы, количество единиц было в точности равно суммарному количеству нулей и двоек.
+    public static void fillArrayRandomOneTwo(int s) {
+        int[] array = new int[s];
+        for (int i = 0; i < array.length; i++) {
+            array[i] = new Random().nextInt(3);
+        }
+        printArray(array);
+        System.out.println();
+        int c1=getCount(array,1);
+        int c0=getCount(array,0);
+        int c2=getCount(array,2);
+       while (c1!=c0+c2){
+           if (c1<c0+c2){
+               int j=findX(array,0);
+               if (j==1000){
+                   j=findX(array,2);
+               }
+               array[j]=1;
+
+           }else{
+               int j=findX(array,1);
+               array[j]=2;
+           }
+           c1=getCount(array,1);
+           c0=getCount(array,0);
+           c2=getCount(array,2);
+
+       }
+
+      int j2=findX(array,2);
+      int j1=findX(array,1);
+      if (j1<j2){
+          array[j1]=2;
+          array[j2]=1;
+      }
+        printArray(array);
+    }
+
 }
