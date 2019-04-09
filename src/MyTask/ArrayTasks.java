@@ -1,11 +1,12 @@
 package MyTask;
 
-import java.util.Scanner;
+import java.util.*;
 
 public class ArrayTasks {
     public static void main(String[] args) {
-//        Array  numbers[] = new Array();
         int[] numbers = {10, 7, 0, 4, 0, 0, 5, 7};
+
+
 
 //        getMax(numbers);
 //        getMin(numbers);
@@ -14,7 +15,8 @@ public class ArrayTasks {
 //        getZeroToStart(numbers);
 //        setArrayNumber();
 //        fillArrayZeroOne();
-          fillArraySimpleNumbers();
+//          fillArraySimpleNumbers();
+        deleteArrayDublicate(numbers);
     }
 
     //вычисляет максимальное значение массива
@@ -175,5 +177,32 @@ public class ArrayTasks {
             System.out.print(array[i] + ", ");
         }
     }
+    //удаление дублей из массива
+    public static void deleteArrayDublicate(int[] array) {
+        printArray(array);
+        List<int[]> listOfStrings = new ArrayList<int[]>();
+        listOfStrings = Arrays.asList(array);
+        System.out.println("Полученный ArrayList с помощью метода Arrays.asList()");
+        for (String str : listOfStrings)
+            System.out.print(" " + str);
+//        listOfStrings = new ArrayList<String>();
+//        ArrayList numbersList2 = new ArrayList();
+//        Collections.addAll(numbersList2, array);
+//        System.out.println();
+        System.out.println(listOfStrings.get(0));
 
+
+//        for (int i = 1; i <= numbersList2.size() - 1; i++) {
+//            int value = (int) numbersList2.get(i);
+//            for (int k = i + 1; k <= array.length - 1; k++) {
+//
+//                if ((int) numbersList2.get(k) == value) {
+//                    numbersList2.remove(k);
+//                }
+//            }
+//        }
+//        for (int j = 0; j < numbersList2.size(); j++) {
+//            System.out.print(numbersList2.get(j) + ", ");
+//        }
+    }
 }
