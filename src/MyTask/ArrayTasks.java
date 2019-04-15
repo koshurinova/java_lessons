@@ -4,9 +4,7 @@ import java.util.*;
 import java.util.Random;
 public class ArrayTasks {
     public static void main(String[] args) {
-        int[] numbers = {2, 2, 2, 2, 0, 0};
-
-
+        int[] numbers = {1, 21, 3, -18, 5, 6, 4, 13, 5,1, 78,79};
 
 //        getMax(numbers);
 //        getMin(numbers);
@@ -20,8 +18,13 @@ public class ArrayTasks {
 //        fillArrayRandom(5);
 //        getCount(numbers,7);
 //        fillArrayRandomTask(15);
-        fillArrayRandomOneTwo(6);
+//        fillArrayRandomOneTwo(10);
 //        findX(numbers,9);
+//        fillArrayRandomMirror(9);
+//        fillArrayRandomThree(15);
+//        fillArrayFibonachi(10);
+        getMinEven(numbers);
+//        getMinSum(numbers);
     }
 
     //вычисляет максимальное значение массива
@@ -57,11 +60,12 @@ public class ArrayTasks {
             newArr[i] = array[size - i];
             newArr[size - i] = array[i];
         }
-        System.out.print("Перевернутый массив:  ");
-        printArray(newArr);
+
+//        System.out.print("Перевернутый массив:  ");
+//        printArray(newArr);
+//        System.out.println();
         return newArr;
     }
-
 
     //перестановка 0 в конец массива (учитывает 0,0)
     public static int[] getZeroToEnd(int[] array) {
@@ -224,7 +228,7 @@ public class ArrayTasks {
     public static void fillArrayRandomTask(int s){
         int[] array = new int[s];
         for(int i=0;i<array.length;i++){
-            array[i]=new Random().nextInt(9);
+            array[i]=new Random().nextInt(10);
         }
         printArray(array);
         System.out.println();
@@ -232,7 +236,7 @@ public class ArrayTasks {
         if (getCount(array,1)>5){
                for (int k=0; k<=array.length-1; k++) {
                    if (array[k]==1 && getCount(array,1)>5){
-                       array[k]= new Random().nextInt(9);
+                       array[k]= new Random().nextInt(10);
                    }
                }
         }else
@@ -310,6 +314,90 @@ public class ArrayTasks {
           array[j2]=1;
       }
         printArray(array);
+    }
+
+    //Создать массив случайных числе, который одинаково читается как слева направо, так и справа налево.
+    public static void fillArrayRandomMirror(int s){
+        int[] array = new int[s];
+        if (s%2!=0){
+            for (int i = 0; i < array.length/2+1; i++) {
+                array[i] = new Random().nextInt(99);
+            }
+        }else{
+        for (int i = 0; i < array.length/2; i++) {
+            array[i] = new Random().nextInt(99);
+        }}
+
+        int[] revarray=getRevers(array);
+        for (int i = array.length/2; i < array.length; i++) {
+            array[i] = revarray[i];
+        }
+
+        printArray(array);
+    }
+
+    //Создать массив случаных чисел, состоящий из троек подряд идущих одинаковых элементов.
+    public static void fillArrayRandomThree(int s){
+        if (s%3!=0){
+            System.out.println("Кол-во элементов в массиве не позволяет заполнить его тройками");
+            System.exit(0);
+        }
+        int s3=s/3;
+        int[] array = new int[s];
+        int[] arrayS3 = new int[s3];
+        for (int i=0; i<s3; i++){
+            arrayS3[i] = new Random().nextInt(99);
+        }
+        for (int i=0; i<s3; i++){
+            for (int j=i*3; j<=i*3+2; j++){
+                array[j]=arrayS3[i];
+            }
+        }
+        printArray(array);
+    }
+
+    //Создать массив из n первых чисел Фибоначчи
+    public static void fillArrayFibonachi(int s){
+        int[] array = new int[s];
+        array[0]=0;
+        array[1]=1;
+        for (int i=2; i<array.length; i++){
+            array[i]=array[i-1]+array[i-2];
+        }
+        printArray(array);
+    }
+
+
+    //Найдите наименьший четный элемент массива (нечетные в физическом списке, а не индексы)
+    public static int getMinEven(int[] array) {
+
+            int minEven = array[1];
+
+
+            for (int i = 1; i <array.length; i++) {
+                if (i%2!=0){
+                if (array[i] <= minEven) {
+                    minEven = array[i];
+                }}
+            }
+            System.out.println("Минимальный четный элемент массива " + minEven);
+            return minEven;
+    }
+
+    //Дан массив. Найдите два соседних элемента, сумма которых минимальна
+    public static int getMinSum(int[] array){
+        int minsum = array[0]+array[1];
+        int el1=0;
+        int el2=0;
+        for (int i = 2; i <array.length; i++) {
+            if (array[i]+array[i-1] <= minsum) {
+                minsum = array[i]+array[i-1];
+                el1=i-1;
+                el2=i;
+                }
+        }
+        System.out.println("Минимальной является сумма "+el1+"-го элемента и " +el2+"-го элемента и она равна "+ minsum);
+        return minsum;
     }
 
 }
