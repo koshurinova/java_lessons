@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.Random;
 public class ArrayTasks {
     public static void main(String[] args) {
-        int[] numbers = {1, 21, 3, -18, 5, 6, 4, 13, 5,1, 78,79};
+        int[] numbers = {1, 21, 3, };
 
 //        getMax(numbers);
 //        getMin(numbers);
@@ -23,8 +23,9 @@ public class ArrayTasks {
 //        fillArrayRandomMirror(9);
 //        fillArrayRandomThree(15);
 //        fillArrayFibonachi(10);
-        getMinEven(numbers);
+//        getMinEven(numbers);
 //        getMinSum(numbers);
+        changeElement(numbers,2,1);
     }
 
     //вычисляет максимальное значение массива
@@ -399,5 +400,29 @@ public class ArrayTasks {
         System.out.println("Минимальной является сумма "+el1+"-го элемента и " +el2+"-го элемента и она равна "+ minsum);
         return minsum;
     }
+
+    //Поменять местами два заданных элемента массива
+    public static int[] changeElement(int[] array, int i1, int i2){
+        int size=array.length;
+        int[] changeArr = new int[size];
+        System.arraycopy(array,0,changeArr,0, size); // копирование массива (массив-источник, позиция начала нового массива,
+        // массив-назначения, начальное положение целевого массивабкол-во копируемых элементов)
+        changeArr[i1]=array[i2];
+        changeArr[i2]=array[i1];
+        printArray(changeArr);
+        return changeArr;
+    }
+
+
+    //сортировка массива
+    public static int[] getSort(int[] array){
+        int[] sortArr = new int[array.length];
+        for (int i=0; i<sortArr.length; i++){
+            getMax(sortArr);
+        }
+        return sortArr;
+
+    }
+
 
 }
